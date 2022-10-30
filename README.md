@@ -68,12 +68,17 @@ negative overall impact on the performance of the program. A negative impact wou
 'or setting up the multithreading in the first place out ways the benefits up on each succesive iteration of the for loop.  
 
 ---
-## SEQUENTIAL PROGRAM
+## SEQUENTIAL PROGRAM  
 
-a. An explanation of the original sequential application being parallelized, what it does (black
-box) and how it works (a high level description of software’s design/architecture). This
-might include call graphs, class diagrams, etc – whatever you find useful to describe the
-structure of the original sequential application.
+The cvtree project, originally developed by Dr Wayne Kelly of the Queensland University of Technology,
+is a small sequential application written in C++ that aims to find the similarity between disparite genomes
+using frequency vectors. the code (located in improved.cpp) will first read a basic text file called list.txt
+containing the number of Bacteria and there names and will stores these names so that it can then retrive the relevant data
+from each bacterias corresponding fasta file located within the data directory. Each fasta file is a Bacteria and consist of many genes, each gene
+in turn is comprised of many proteins called amino acids. There are 20 commonly occuring amino acids each represented by a letter of 
+the alphabet. Instead of comparing each bacteria's genes, parts of the genomes called K-mers can be used to statistically determine
+'how closely related the bacteria are to one another. a K-mer is a sub-section of a gene and the K represents the number of amino acids
+that are grouped together for analysis. In this case Dr Kelly has used 6-mers to group together the amino acids and traverse the gene. 
 
 the original sequential application (sourcecode located in improved.cpp) begins execution within the main function
 (code snippet included below)  
@@ -97,17 +102,15 @@ Functions.
 ![FLOWCHART](./README_images/FLOW%20CHART.png)  
 
 ---
-## CHALLENGES
-
-g. The story of how you overcame performance problems/barriers (e.g. load imbalance,
-memory contention, granularity, data dependencies, etc) to improving parallel
-performance.
+## CHALLENGES  
 
 The greatest challenge that I faced during this project was figuring out how the sequential program worked, and more sepcifically
 how the data dependencies flowed 
 throughout the program, detangelingling the web of nested functionality. Furthermore I struggled initially to
-understand which parts of the program could be even be parallezied mostly due to the previously mentioned data dependency problem and wether 
-or not those parallel regions would require synchronisation or not.  
+understand which parts of the program could even be parallezied succesfully, mostly due to the previously mentioned data dependency problem and wether 
+or not those parallel regions would require synchronisation or could be performed out of order. I solved this problem by using Visual
+Studios debugging capabilities to step through the code so I could follow the main thread as it executed the code and used the Profiler to see where
+the program was spending the most amount of time.
 
 ---
 ## POTENTIAL PARALLELISM
@@ -189,16 +192,7 @@ void CompareAllBacteria(double** array)
 ```  
 
 ---
-## RESULTS
-
-c. How did you map computation and/or data to processors? Which parallelism abstractions
-or programming language constructs did you use to perform synchronization?
-
-d. Timing and profiling results, both before and after parallelization and a speedup graph.
-
-e. How did you test that the parallel version produced the exact same results as the original
-sequential version?
-
+## RESULTS  
 
 The Sequential program running as a single process with a single thread was able to execute on my Desktop
 computer at home in 37 seconds and only used 3% of the total CPU power available on the machine as it was
@@ -242,6 +236,9 @@ respectively.
 
 As you can see the sequential graph mostly appears to be a flat line from start to finish which was entirely expected, however as
 the number of cores available increases the program as a whole executes in less time, but more interestingly to major zones appear.  
+
+e. How did you test that the parallel version produced the exact same results as the original
+sequential version?  
 
 ---
 ## OUTCOME
