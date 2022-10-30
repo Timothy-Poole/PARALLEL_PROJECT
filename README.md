@@ -151,11 +151,12 @@ In order to parallelize the program, I chose to make a few minor changes to the 
 
 Firstly I chose to insert the command "# pragma omp parallel for" **before** the first for loop. Next I chose to insert another 
 "# pragma omp parallel for" **after** the first for and **before** the nested for in the triangular for loop. Initially I read online
-that for a nested for loop it is optimal to put the command outside of the entire nested loop and Open MP with naturally
+that for a nested for loop it is optimal to put the command outside of the entire nested loop and Open MP will naturally
 configure the best solution, However in testing I found placing the command only before the second for statement to be 
-best solution with the fastest time. This may have been due to the nested for loop being triangular instead of rectanglar. 
+the best solution with the fastest time. This may have been due to the nested for loop being triangular instead of rectanglar. 
 I also chose to replace the print statements within the parallel region with a line
-that would place the results into a 2 dimensional array declared and intialized prior. The reasoning behind this decision was that I/O operations are 
+that would place the results into a 2 dimensional array declared and intialized prior and parsed to the function as an argument. 
+The reasoning behind this decision was that I/O operations are potentially
 poorly optimized and are best left outside parallel regions. Furthermore, in this instance I deemed it more realistic that the results would
 be stored in an array and then printed later as opposed to always needing to be printed every time the program is run. 
 Overall, these changes did not require much reconfiguration of the existing code nor did any pre existing algorithms needed
@@ -191,12 +192,12 @@ void CompareAllBacteria(double** array)
 }
 ```  
 
-Similarly, while main appears quit different to its original state it did not require extensive reconfiguration. The only chnages added are simply
-a for loop located between the ReadInputFile and CompareAllBacteria functions which is present create the previously mentioned 2 dimensional array
+Similarly, while main appears quite different to its original state it did not require extensive reconfiguration. The only chnages added are simply
+a for loop located between the ReadInputFile and CompareAllBacteria functions which is present to create the previously mentioned 2 dimensional array
 which due to poor 2 dimensional array support in C++ is actually an array or pointer of arrays or pointers to doubles. The only other addition was 
 a triangular nested for loop taken directly from the code above which exists to print out the contents of the array to ensure the results are in
 fact accurate. Lastly the command "omp_set_num_threads(x)" is present within main. This command dictates to Open MP how many threads should be used
-when executing the program and for the sake of simplicity I chose to put it once inside of main so that it would propogate to every Open MP command
+when executing the program and for the sake of simplicity I chose to put it in the beginning of main so that it would propogate to every Open MP command
 that would execute further down (which is all of them).
 
 ```c++
@@ -227,7 +228,7 @@ int main(int argc, char* argv[])
 		}
 	return 0;
 }
-```
+```  
 
 ---
 ## RESULTS  
