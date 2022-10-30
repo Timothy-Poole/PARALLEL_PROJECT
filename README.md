@@ -121,6 +121,9 @@ the number of cores available increases the program as a whole executes in less 
 
 ---
 ## TOOLS & TECHNIQUES USED  
+
+![RYZEN 5950X](./README_images/)  
+
 This project was run inside of a solution (.sln) inside of Visual Studio. The decision to use Visual Studio was made primarily to 
 make use of Visual Studio's inbuilt Performance Profiler. The Profiler was set to monitor CPU usage, and used to test and benchmark 
 each iteration of the program from the sequential version (located in improved.cpp), to each iteration of the parallel version 
