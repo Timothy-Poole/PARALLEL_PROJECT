@@ -225,7 +225,7 @@ From the spoeedup graph below, a strange phenomenon can be observed.
 
 While adding more cores does increase performance, there seems to be drastically diminishing returns beyond a certain point.
 This begs the question, why did more processing power not continue to deliver better results in a linear fashion? To answer this question
-I have provided the Performance Profilers CPU % graphs obtained from nechmarking the sequential, 1, 2, 3 and 12 core run throughs of the program
+I have provided the Performance Profilers CPU % graphs obtained from bechmarking the sequential, 1, 2, 3 and 12 core run throughs of the program
 respectively.  
 
 ![SEQUENTIAL](./README_images/diagseq.JPG)  
@@ -234,22 +234,24 @@ respectively.
 ![3 CORE](./README_images/diag3.JPG)  
 ![12 CORE](./README_images/diag12.JPG)  
 
-Besides the there obvious difference in overall execution time, these graphs illustrate a clear trend.
+Besides their obvious difference in overall execution time, these graphs illustrate a clear trend.
 As you can see the sequential graph mostly appears to be a flat line from start to finish, which was entirely expected. However as
 the number of cores available increases the program as a whole executes in less time, but more interestingly 2 distinct zones appear.
 the first zone on the left side of each of the parallelized graphs appears flatter, while the right "hump" appears more densely packed.
-I choose the explain this phenomenon with an analogy. This program is like a piece of string and the length of that string when it is stretched 
-out is akin to the total time it takes for the prgram to fully execute. The string starts out like the sequential program and is layed out flat,
-but if you were to place you finger on both ends and push them closer together a rising hump would be created and the distance between the two ends of
-the string would be closer together. The string rises higher off of the table it was previously pressed against. In this example the height of the string
-off of the table at any point along the table is analogous the % CPU power being used in the above graphs, and the distance between the two ends of the string
-represents the difference between when the program starts and finishes, essentially the execution time.  
+I choose to explain this phenomenon with an analogy. This program is like a piece of string and the length of that string when it is stretched 
+out is akin to the total time it takes for the program to fully execute.  
 
 ![3 CORE](./README_images/Pulling_String_Taunt.jpg)  
+
+The string starts out like the sequential program and is layed out flat,
+but if you were to place you finger on both ends and push them closer together a rising hump would be created and the distance between the two ends of
+the string would be closer together.  
+
 ![3 CORE](./README_images/Pulling_String_Slack.jpg)  
 
-e. How did you test that the parallel version produced the exact same results as the original
-sequential version?  
+The string rises higher off of the table it was previously pressed against. In this example the height of the string
+off of the table at any point along the table is analogous to the % CPU power being used in the above graphs, and the distance between the two ends of the string
+represents the difference between when the program starts and finishes, essentially the execution time.   
 
 ---
 ## OUTCOME  
