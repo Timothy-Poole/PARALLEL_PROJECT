@@ -26,7 +26,7 @@ to the console.
 
 ![RYZEN 5950X](./README_images/AMD-Ryzen-5000-Series-Ryzen-9.png)  
 
-I ran all these test on my home computer running windows 10 on a Ryzen 5950x Processor which has 16 cores and 32 threads.  
+I ran all of these tests on my home computer running windows 10 on a Ryzen 5950x Processor which has 16 cores and 32 threads.  
 
 The project itself was run inside of a solution (.sln) inside of Visual Studio. The decision to use Visual Studio was made primarily to 
 make use of Visual Studio's inbuilt Performance Profiler. The Profiler was set to monitor CPU usage, and used to test and benchmark 
