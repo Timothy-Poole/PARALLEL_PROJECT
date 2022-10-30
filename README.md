@@ -241,7 +241,7 @@ bound to only one thread.
 |---------------|------------|-----------------------|------------------|---------------------|
 |  1            | 1          | 37                    |         3        |      N/A            |  
 
-This is in stark contrast to the speed up achieved by using 4 cores or more. Specifically the best results
+This is in stark contrast to the speed up achieved by using 3 cores or more. Specifically the best results
 which were produced when using 12 cores which sped up execution time by a factor of x3.  
 
 |   No. Threads |  No. Cores  |Execution Time (s)  |  CPU % Utilization  |  Speed Up Achieved  |
@@ -262,7 +262,7 @@ From the spoeedup graph below, a strange phenomenon can be observed.
 
 ![SPEEDUP GRAPH](./README_images/Speed%20Up%20Graph.png)  
 
-While adding more cores does increase performance, there seems to be drastically diminishing returns beyond a certain point.
+While adding more cores does increase performance, there appears to be drastically diminishing returns beyond a certain point.
 This begs the question, why did more processing power not continue to deliver better results in a linear fashion? To answer this question
 I have provided the Performance Profilers CPU % graphs obtained from bechmarking the sequential, 1, 2, 3 and 12 core run throughs of the program
 respectively.  
@@ -290,17 +290,19 @@ the string would be closer together.
 
 The string rises higher off of the table it was previously pressed against. In this example the height of the string
 off of the table at any point along the table is analogous to the % CPU power being used in the above graphs, and the distance between the two ends of the string
-represents the difference between when the program starts and finishes, essentially the execution time.  
+represents the difference between when the program start and finish times, essentially the execution time.  
 
 This is why i chose to add an extra print statement in the middle of the CompareAllBacteria function so that I could analyse the area identified
-as being the hottest parallel region.
+as being the hottest parallel region.  
 
-One potential issue that did arise from threading the program was the potential corruption of data accuracy due to a lack of synchronisation. 
+it is clear that this region benefitted more aggresively to an increase in cores.  
+
+One potential issue that did arise from threading the program was the potential for corruption of data and accuracy due to a lack of synchronisation. 
 This is because threads are able to execute out of order.
 I needed to determine if this was in fact a problem. Theoretically, due to the formula that calculates correlation only operating using 
 addition, I did not foresee any issues arising as a results of stringent order of operations. Furthermore, because my changes to the code utilized an
 array, and used coordinate values "i" and "j" to populate the array out of order and then a final nested for loop at the end of the main function 
-to read the results in order, I was certain there would be no problems. Nonetheless, I scrutinized the output of each parallel version othe code against
+to read the results in order, I was certain there would be no problems. Nonetheless, I scrutinized the output of each parallel version of the code against
 the output of the sequential program and, using "i" and "j" to match results, found no difference. Therefore the results found by the report are valid. 
 To see the output produced by each run through of the program, simply navigate to the results directory and look in the aptly named ".txt" file for the
 relevant run through. Furthermore, the diagnostic reports suffixed by ".diag", produced by the performance profiler for each run through of the program 
@@ -318,20 +320,22 @@ surprised by how easy and effective implementing Open MP has been. Furthermore t
 seem far more accesible to programmers with lower levels of competancy and are generally easier to access, 
 which is not the case with pthreads.  
 
-Furthermore I have enjoyed learning about how to analyse flow control within a program and follow the data dependencies to
+Furthermore I have enjoyed learning about how to analyse flow control within a program and how to follow the data dependencies to
 determine where best to apply parallelism to achieve higher performance. Previously when developing programs I **NEVER** stopped
 to consider that by default most if not all applications are developed sequentially without taking into consideration parallelism 
-and thus many programmers are leaving otherwise fairly achievable performance "on the table".  
+and thus many programmers are leaving otherwise fairly achievable performance gains "on the table".  
 
 The final speedup achieved was approximately a x3 increase. This is a fairly 
 good increase in speedup however I did expect that with more cores the speedup would have continued to increase
 further instead of stabilising so quickly after only 3 cores. This however probably highlights that more parallelism could
-have been added to the first half of the problem where the speedup was less impressive. However, this could also 
-be the result of a small data set. The area I identified as most computational intensive received the biggest increase in
-performance. If this test were to be performed on a larger dataset, for example 400 bacteria as opposed to only 41,  I strongly 
+have been added to the first half of the program where the speedup was less impressive. Furthermore the Bacteria class and Comparevacteria functions
+could both have been parallelized to achieve potentially greater performance. However these results could also 
+be the product of a small data set. The area I identified as most computational intensive received the biggest increase in
+performance. If this test were to be performed on a larger dataset, for example 400 bacteria or even 4000 as opposed to only 41,  I strongly 
 believe the difference between the sequential
 program and the parallel programs would have been far greater. Furthermore I beleive that the difference would hasve grown exponentially. 
-It is my hypothesis that more cores do make a significant difference but in this limited experiment were not fully utilized.  
+It is my hypothesis that more cores does make a significant difference but this experiment limited the programs ability to make use of that
+extra processing power.  
 
 Beyond trying to further improve the program's performance with parallelism using Open MP, This report could
 be extended in future to compare the speedup achieved by an implicit threading library, like "Open MP", vs an Explicit 
