@@ -94,7 +94,20 @@ int main(int argc,char * argv[])
 The folowing diagram concisely sums up the key components of the main function and helps to further
 breakdown the program into its 3 major sections, the Init, ReadInputFile and CompareAllBacteria
 Functions.  
-![FLOWCHART](./README_images/FLOW%20CHART.png)
+![FLOWCHART](./README_images/FLOW%20CHART.png)  
+
+---
+## CHALLENGES
+
+g. The story of how you overcame performance problems/barriers (e.g. load imbalance,
+memory contention, granularity, data dependencies, etc) to improving parallel
+performance.
+
+The greatest challenge that I faced during this project was figuring out how the sequential program worked, and more sepcifically
+how the data dependencies flowed 
+throughout the program, detangelingling the web of nested functionality. Furthermore I struggled initially to
+understand which parts of the program could be even be parallezied mostly due to the previously mentioned data dependency problem and wether 
+or not those parallel regions would require synchronisation or not.  
 
 ---
 ## POTENTIAL PARALLELISM
@@ -108,15 +121,6 @@ required to expose parallelism, such as replacing algorithms or code restructuri
 transformations.
 
 After anlalysing the codebase I concluded that there were 3 major chnages that could be implemented to improve the performance of the program  
-
----
-## CHALLENGES
-
-g. The story of how you overcame performance problems/barriers (e.g. load imbalance,
-memory contention, granularity, data dependencies, etc) to improving parallel
-performance.
-
-Initially After identifying that the major 
 
 ---
 ## THE SOLUTION
