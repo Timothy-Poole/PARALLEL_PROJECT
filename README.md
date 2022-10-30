@@ -72,9 +72,9 @@ negative overall impact on the performance of the program. A negative impact wou
 
 The cvtree project, originally developed by Dr Wayne Kelly of the Queensland University of Technology,
 is a small sequential application written in C++ that aims to find the similarity between disparite genomes
-using frequency vectors. the code (located in improved.cpp) will first read a basic text file called list.txt
-containing the number of Bacteria and there names and will stores these names so that it can then retrive the relevant data
-from each bacterias corresponding fasta file located within the data directory. Each fasta file is a Bacteria and consist of many genes, each gene
+using frequency vectors. The code (located in improved.cpp) will first read a basic text file called list.txt
+containing the number of Bacteria and their names and will stores these names so that it can then retrieve the relevant data
+from each bacteria's corresponding fasta file located within the data directory. Each fasta file is an Bacteria and consists of many genes, each gene
 in turn is comprised of many proteins called amino acids. There are 20 commonly occuring amino acids each represented by a letter of 
 the alphabet. Instead of comparing each bacteria's genes, parts of the genomes called K-mers can be used to statistically determine
 'how closely related the bacteria are to one another. a K-mer is a sub-section of a gene and the K represents the number of amino acids
@@ -119,12 +119,18 @@ all execute at once and then again immediately after. This would result in the s
 
 Lastly and most impactful of all is the CompareAllBacteria function. After an array of pointers to Bacteria is created, there are 2 major flow control areas
 that greatly affect the execution time of the program. The first is a basic for loop that executes "number_bacteria" times, which is 41, and each time most
-noticeably declares a new Bacteria each time. This is significant as the bacteria class contains many data dependencies and numerous flow control statements
-such as while loops and for loops which may account for a large percentage of the programs execution time.  
+noticeably declares a new Bacteria. This is significant as the bacteria class contains many data dependencies and numerous flow control statements
+such as while and for loops which may account for a large percentage of the programs execution time.  
 
 Furthermore, the second major part of the CompareAllBacteria function is the double or nested triangle for loop which executes approximately number_bacteria<sup>2</sup> / 2 times and runs the CompareBacteria function every iteration.   
 
-CompareBacteria itself also contains numerous data dependencies and greatly increase the execution time of the program. 
+CompareBacteria itself also contains numerous data dependencies and greatly increase the execution time of the program. Admittedly I struggled to analyse the
+data dependencies beyong the overall view of CompareAllBacteria. In the data dependency diagram for CompareAllBacteria I have generally assigned an equal
+weighting to all operations that take place inside the for loops however realisticaly Declaring a new Bacteria and CompareBacteria should have been weighted
+far more.  
+
+Immediately both major parts of CompareAllBacteria stand out as prime candidates for parallelisation, specifically because they contain computantionally intensive
+functions and iterate over them many times.
 
 ---
 ## CHALLENGES  
