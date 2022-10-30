@@ -284,7 +284,7 @@ int main(int argc, char* argv[])
 {
 
 	time_t t1 = time(NULL);
-	omp_set_num_threads(32);
+	omp_set_num_threads(10);
 
 	Init();
 	ReadInputFile("list.txt");

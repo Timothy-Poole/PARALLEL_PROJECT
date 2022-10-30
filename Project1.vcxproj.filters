@@ -45,6 +45,10 @@
     <Text Include="results\14_cores.txt" />
     <Text Include="results\16_cores.txt" />
     <Text Include="results\Sequential.txt" />
+    <Text Include="results\1_cores.txt" />
+    <Text Include="results\3_cores.txt" />
+    <Text Include="results\5_cores.txt" />
+    <Text Include="results\Instructions.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Sequential.diagsession" />
@@ -64,5 +68,8 @@
     <None Include="results\14_cores.diagsession" />
     <None Include="results\16_cores.diagsession" />
     <None Include="results\Sequential.diagsession" />
+    <None Include="results\1_cores.diagsession" />
+    <None Include="results\3_cores.diagsession" />
+    <None Include="results\5_cores.diagsession" />
   </ItemGroup>
 </Project>

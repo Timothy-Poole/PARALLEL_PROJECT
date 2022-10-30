@@ -1,4 +1,3 @@
-/*
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -281,4 +280,3 @@ int main(int argc,char * argv[])
 	printf("time elapsed: %lld seconds\n", t2 - t1);
 	return 0;
 }
-*/

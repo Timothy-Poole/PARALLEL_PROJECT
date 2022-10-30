@@ -1,0 +1,13 @@
+In order to run and compile this program simply 
+1. open the solution inside of visual studioun
+2. uncomment out the version of the program you wish to run
+   impoved.cpp for the sequential version and final.cpp for the parallel version
+3. if running the parallel version then adjust the number of threads the program will use
+by adjusting the command omp_set_num_threads(x); located in line 287 within the main()
+4. ensure visual has open MP enabled, do this by right clicking on the project, then 
+selecting project settings from the drop down menu, clicking on the "All Options" option,
+located within the "C/C++" section, scrolling down to "Open MP Support" and selecting yes 
+from the dropdown.
+5. lastly click on Debug located in the top menu bar, and from the drop down select Performance Profiler
+6. Tick the "CPU Usage" box and then click start and the program will compile, run and print the output
+to the console.

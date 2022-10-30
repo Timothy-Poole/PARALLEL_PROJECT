@@ -148,10 +148,14 @@
     <Text Include="results\12_cores.txt" />
     <Text Include="results\14_cores.txt" />
     <Text Include="results\16_cores.txt" />
+    <Text Include="results\1_cores.txt" />
     <Text Include="results\2_cores.txt" />
+    <Text Include="results\3_cores.txt" />
     <Text Include="results\4_cores.txt" />
+    <Text Include="results\5_cores.txt" />
     <Text Include="results\6_cores.txt" />
     <Text Include="results\8_cores.txt" />
+    <Text Include="results\Instructions.txt" />
     <Text Include="results\Sequential.txt" />
     <Text Include="Sequential.txt" />
     <Text Include="list.txt" />
@@ -168,8 +172,11 @@
     <None Include="results\12_cores.diagsession" />
     <None Include="results\14_cores.diagsession" />
     <None Include="results\16_cores.diagsession" />
+    <None Include="results\1_cores.diagsession" />
     <None Include="results\2_cores.diagsession" />
+    <None Include="results\3_cores.diagsession" />
     <None Include="results\4_cores.diagsession" />
+    <None Include="results\5_cores.diagsession" />
     <None Include="results\6_cores.diagsession" />
     <None Include="results\8_cores.diagsession" />
     <None Include="results\Sequential.diagsession" />
