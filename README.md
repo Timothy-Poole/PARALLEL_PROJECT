@@ -228,10 +228,10 @@ This begs the question, why did more processing power not continue to deliver be
 I have provided the Performance Profilers CPU % graphs obtained from nechmarking the sequential, 1, 2, 3 and 12 core run throughs of the program
 respectively.  
 
-![SEQUENTIAL](./README_images/diagseq.JPG)
-![1 CORE](./README_images/diag1.JPG)
-![2 CORE](./README_images/diag2.JPG)
-![3 CORE](./README_images/diag3.JPG)
+![SEQUENTIAL](./README_images/diagseq.JPG)  
+![1 CORE](./README_images/diag1.JPG)  
+![2 CORE](./README_images/diag2.JPG)  
+![3 CORE](./README_images/diag3.JPG)  
 ![12 CORE](./README_images/diag12.JPG)  
 
 Besides the there obvious difference in overall execution time, these graphs illustrate a clear trend.
@@ -243,7 +243,10 @@ out is akin to the total time it takes for the prgram to fully execute. The stri
 but if you were to place you finger on both ends and push them closer together a rising hump would be created and the distance between the two ends of
 the string would be closer together. The string rises higher off of the table it was previously pressed against. In this example the height of the string
 off of the table at any point along the table is analogous the % CPU power being used in the above graphs, and the distance between the two ends of the string
-represents the difference between when the program starts and finishes, essentially the execution time.
+represents the difference between when the program starts and finishes, essentially the execution time.  
+
+![3 CORE](./README_images/Pulling_String_Taunt.jpg)  
+![3 CORE](./README_images/Pulling_String_Slack.jpg)  
 
 e. How did you test that the parallel version produced the exact same results as the original
 sequential version?  
