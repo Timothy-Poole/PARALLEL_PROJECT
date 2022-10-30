@@ -62,10 +62,10 @@ void Init()
 }
 ```  
 
-This for loop will only run 6 times as i will only go until it is just less than LEN which in this case is defined as equal
+This for loop will only run 6 times as "i" will only go until it is just less than "LEN" which in this case is defined as equal
 to 6. The reasoning behind this decision is that the impact of adding parallelization here will either have a negligible or
 negative overall impact on the performance of the program. A negative impact would most likely be due to the cost and overhead
-'or setting up the multithreading in the first place out ways the benefits up on each succesive iteration of the for loop.  
+of setting up the multithreading in the first place, outwaying the benefits of parallelization on each succesive iteration of the for loop.  
 
 ---
 ## SEQUENTIAL PROGRAM  & POTENTIAL PARALLELISM
