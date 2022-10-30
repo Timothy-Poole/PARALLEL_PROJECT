@@ -241,17 +241,31 @@ the first zone on the left side of each of the parallelized graphs appears flatt
 I choose to explain this phenomenon with an analogy. This program is like a piece of string and the length of that string when it is stretched 
 out is akin to the total time it takes for the program to fully execute.  
 
-![3 CORE](./README_images/Pulling_String_Taunt.jpg)  
+![STRING TAUT](./README_images/Pulling_String_Taunt.jpg)  
 
 The string starts out like the sequential program and is layed out flat,
 but if you were to place you finger on both ends and push them closer together a rising hump would be created and the distance between the two ends of
 the string would be closer together.  
 
-![3 CORE](./README_images/Pulling_String_Slack.jpg)  
+![STRING LOOSE](./README_images/Pulling_String_Slack.jpg)  
 
 The string rises higher off of the table it was previously pressed against. In this example the height of the string
 off of the table at any point along the table is analogous to the % CPU power being used in the above graphs, and the distance between the two ends of the string
-represents the difference between when the program starts and finishes, essentially the execution time.   
+represents the difference between when the program starts and finishes, essentially the execution time.  
+
+This is why i chose to add an extra print statement in the middle of the CompareAllBacteria function so that I could analyse the area identified
+as being the hottest parallel region.
+
+One potential issue that did arise from threading the program was the potential corruption of data accuracy due to a lack of synchronisation. 
+This is because threads are able to execute out of order.
+I needed to determine if this was in fact a problem. Theoretically, due to the formula that calculates correlation only operating using 
+addition, I did not foresee any issues arising as a results of stringent order of operations. Furthermore, because my changes to the code utilized an
+array, and used coordinate values "i" and "j" to populate the array out of order and then a final nested for loop at the end of the main function 
+to read the results in order, I was certain there would be no problems. Nonetheless, I scrutinized the output of each parallel version othe code against
+the output of the sequential program and, using "i" and "j" to match results, found no difference. Therefore the results found by the report are valid. 
+To see the output produced by each run through of the program, simply navigate to the results directory and look in the aptly named ".txt" file for the
+relevant run through. Furthermore, the diagnostic reports suffixed by ".diag", produced by the performance profiler for each run through of the program 
+can also be found in the same directory.
 
 ---
 ## OUTCOME  
