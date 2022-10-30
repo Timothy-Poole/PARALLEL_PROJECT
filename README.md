@@ -1,5 +1,5 @@
 # CVTREE PARALLELISATION
-![EVERTON DIGITAL](./README_images/DNA_reduced.jpg)
+![CVTREE](./README_images/DNA_reduced.jpg)
 ### By Tim Poole
 ### n10476512
 ### CAB401 
@@ -8,7 +8,7 @@
 ---
 ## BUILD INSTRUCTIONS  
 
-In order to run and compile this program simply 
+In order to run and compile this program simply (unzip the file first)
 1. open the solution inside of visual studio  
 2. uncomment out the version of the program you wish to run, impoved.cpp for the sequential version and final.cpp for the parallel version  
 3. if running the parallel version then adjust the number of threads the program will use by adjusting the command 
@@ -20,6 +20,52 @@ from the dropdown
 5. lastly click on Debug located in the top menu bar, and from the drop down select Performance Profiler  
 6. Tick the "CPU Usage" box and then click start and the program will compile, run, and print the output 
 to the console.  
+
+---
+## TOOLS & TECHNIQUES USED  
+
+![RYZEN 5950X](./README_images/AMD-Ryzen-5000-Series-Ryzen-9.png)  
+
+I ran all these test on my home computer running windows 10 on a Ryzen 5950x Processor which has 16 cores and 32 threads.  
+
+The project itself was run inside of a solution (.sln) inside of Visual Studio. The decision to use Visual Studio was made primarily to 
+make use of Visual Studio's inbuilt Performance Profiler. The Profiler was set to monitor CPU usage, and used to test and benchmark 
+each iteration of the program from the sequential version (located in improved.cpp), to each iteration of the parallel version 
+(located in final.cpp), With the number of threads increased progressively in order to test the affect that more cores, and
+thus more threads, would have on the results.
+
+Open Mp was the threading library used to parallelize the program. Included using code below.
+```c++
+#include <omp.h> 
+```
+The major command used throughout the program in order to parallelize the program was the omp parallel for command.
+```c++
+#pragma omp parallel for 
+```
+This command was used extensively to multithread every instance of a for or nested for loop within the program where 
+there was **SUFFICIENT BURDEN** on the CPU to justify its use. However not every for loop required parallelization.
+an example of a section where the use of this command
+was deemed **UNESSECARY** is outlined below (from lines 13-24 of improved.cpp).  
+
+```c++
+#define LEN			6
+#define AA_NUMBER		20
+#define	EPSILON			1e-010
+
+void Init()
+{
+	M2 = 1;
+	for (int i = 0; i < LEN - 2; i++)	// M2 = AA_NUMBER ^ (LEN-2);
+		M2 *= AA_NUMBER;
+	M1 = M2 * AA_NUMBER;		// M1 = AA_NUMBER ^ (LEN-1);
+	M = M1 * AA_NUMBER;			// M  = AA_NUMBER ^ (LEN);
+}
+```  
+
+This for loop will only run 6 times as i will only go until it is just less than LEN which in this case is defined as equal
+to 6. The reasoning behind this decision is that the impact of adding parallelization here will either have a negligible or
+negative overall impact on the performance of the program. A negative impact would most likely be due to the cost and overhead
+'or setting up the multithreading in the first place out ways the benefits up on each succesive iteration of the for loop.  
 
 ---
 ## SEQUENTIAL PROGRAM
@@ -61,104 +107,7 @@ granularity to be worth exploiting? Is it scalable parallelism? A discussion of 
 required to expose parallelism, such as replacing algorithms or code restructuring
 transformations.
 
-After anlalysing the codebase I concluded that there were 3 major chnages that could be implemented to improve the performance of the program
-
----
-## RESULTS
-
-c. How did you map computation and/or data to processors? Which parallelism abstractions
-or programming language constructs did you use to perform synchronization?
-
-d. Timing and profiling results, both before and after parallelization and a speedup graph.
-
-e. How did you test that the parallel version produced the exact same results as the original
-sequential version?
-
-
-The Sequential program running as a single process with a single thread was able to execute on my Desktop
-computer at home in 37 seconds and only used 3% of the total CPU power available on the machine as it was
-bound to only one thread.  
-
-|   No. Threads |  No. Cores |Execution Time (s)  |  CPU % Utilization  |  Speed Up Achieved  |
-|---------------|------------|-----------------------|------------------|---------------------|
-|  1            | 1          | 37                    |         3        |      N/A            |  
-
-This is in Stark Contrast to the speed up achieved by using 4 cores or more. Specifically the best results
-which were produced when using 12 cores which speedup execution time by a factor of x3.  
-
-|   No. Threads |  No. Cores  |Execution Time (s)  |  CPU % Utilization  |  Speed Up Achieved  |
-|----------|------|-----|-----------------------|-------------|
-|  2       |   1   | 21  |         6            |      1.761     |
-|  4       |   2   | 19  |         13           |      1.947     |
-|  6       |   3   | 13  |         18           |      2.846     |
-|  8       |   4   | 13  |         25           |      2.846     |
-|  10      |   5   | 13  |         32           |      2.846     |
-|  12      |   6   | 13  |         38           |      2.846     |
-|  16      |   8   | 13  |         50           |      2.846     |
-|  20      |   10  | 13  |         63           |      2.846     |
-|  24      |   12  | 12  |         75           |      3.083     |
-|  28      |   14  | 13  |         89           |      2.846     |
-|  32      |   16  | 13  |         100          |      2.846     |
-
-From the spoeedup graph below, a strange phenomenon can be observed.  
-
-![EVERTON DIGITAL](./README_images/Speed%20Up%20Graph.png)  
-
-While adding more cores does increase performance, there seems to be drastically diminishing returns beyond a certain point.
-This begs the question why did more processing power not continue to deliver better results in a linear fashion. To answer this question
-I have provided the Performance Profilers CPU % graphs obtained from the sequential program, and 1, 2, 3 and 12 core run throughs of the program
-respectively.  
-
-![SEQUENTIAL](./README_images/diagseq.JPG)
-![1 CORE](./README_images/diag1.JPG)
-![2 CORE](./README_images/diag2.JPG)
-![3 CORE](./README_images/diag3.JPG)
-![12 CORE](./README_images/diag12.JPG)  
-
-As you can see the sequential graph mostly appears to be a flat line from start to finish which was entirely expected, however as
-the number of cores available increases the program as a whole executes in less time, but more interestingly to major zones appear.
-
-
----
-## TOOLS & TECHNIQUES USED  
-
-![RYZEN 5950X](./README_images/AMD-Ryzen-5000-Series-Ryzen-9.png)  
-
-This project was run inside of a solution (.sln) inside of Visual Studio. The decision to use Visual Studio was made primarily to 
-make use of Visual Studio's inbuilt Performance Profiler. The Profiler was set to monitor CPU usage, and used to test and benchmark 
-each iteration of the program from the sequential version (located in improved.cpp), to each iteration of the parallel version 
-(located in final.cpp), With the number of threads increased progressively in order to test the affect that more cores, and
-thus more threads, would have on the results.
-
-Open Mp was the threading library used to parallelize the program. Included using code below.
-```c++
-#include <omp.h> 
-```
-The major command used throughout the program in order to parallelize the program was the omp parallel for command.
-```c++
-#pragma omp parallel for 
-```
-This command was used extensively to multithread every instance of a for or nested for loop within the program where 
-there was **sufficient burden** on the CPU to justify its use. an example of a section where the use of this command
-was deemed unessecary is outlined below (from lines 13-24 of improved.cpp).  
-```c++
-#define LEN			6
-#define AA_NUMBER		20
-#define	EPSILON			1e-010
-
-void Init()
-{
-	M2 = 1;
-	for (int i = 0; i < LEN - 2; i++)	// M2 = AA_NUMBER ^ (LEN-2);
-		M2 *= AA_NUMBER;
-	M1 = M2 * AA_NUMBER;		// M1 = AA_NUMBER ^ (LEN-1);
-	M = M1 * AA_NUMBER;			// M  = AA_NUMBER ^ (LEN);
-}
-```  
-This for loop will only run 6 times as i will only go until it is just less than LEN which in this case is defined as equal
-to 6. The reasoning behind this decision is that the impact of adding parallelization here will either have a negligible or
-negative overall impact on the performance of the program. A negative impact would most likely be due to the cost and overhead
-'or setting up the multithreading in the first place out ways the benefits up on each succesive iteration of the for loop.  
+After anlalysing the codebase I concluded that there were 3 major chnages that could be implemented to improve the performance of the program  
 
 ---
 ## CHALLENGES
@@ -233,7 +182,62 @@ void CompareAllBacteria(double** array)
 			array[i][j] = correlation;
 		}
 }
-```
+```  
+
+---
+## RESULTS
+
+c. How did you map computation and/or data to processors? Which parallelism abstractions
+or programming language constructs did you use to perform synchronization?
+
+d. Timing and profiling results, both before and after parallelization and a speedup graph.
+
+e. How did you test that the parallel version produced the exact same results as the original
+sequential version?
+
+
+The Sequential program running as a single process with a single thread was able to execute on my Desktop
+computer at home in 37 seconds and only used 3% of the total CPU power available on the machine as it was
+bound to only one thread.  
+
+|   No. Threads |  No. Cores |Execution Time (s)  |  CPU % Utilization  |  Speed Up Achieved  |
+|---------------|------------|-----------------------|------------------|---------------------|
+|  1            | 1          | 37                    |         3        |      N/A            |  
+
+This is in Stark Contrast to the speed up achieved by using 4 cores or more. Specifically the best results
+which were produced when using 12 cores which speedup execution time by a factor of x3.  
+
+|   No. Threads |  No. Cores  |Execution Time (s)  |  CPU % Utilization  |  Speed Up Achieved  |
+|----------|------|-----|-----------------------|-------------|
+|  2       |   1   | 21  |         6            |      1.761     |
+|  4       |   2   | 19  |         13           |      1.947     |
+|  6       |   3   | 13  |         18           |      2.846     |
+|  8       |   4   | 13  |         25           |      2.846     |
+|  10      |   5   | 13  |         32           |      2.846     |
+|  12      |   6   | 13  |         38           |      2.846     |
+|  16      |   8   | 13  |         50           |      2.846     |
+|  20      |   10  | 13  |         63           |      2.846     |
+|  24      |   12  | 12  |         75           |      3.083     |
+|  28      |   14  | 13  |         89           |      2.846     |
+|  32      |   16  | 13  |         100          |      2.846     |
+
+From the spoeedup graph below, a strange phenomenon can be observed.  
+
+![EVERTON DIGITAL](./README_images/Speed%20Up%20Graph.png)  
+
+While adding more cores does increase performance, there seems to be drastically diminishing returns beyond a certain point.
+This begs the question why did more processing power not continue to deliver better results in a linear fashion. To answer this question
+I have provided the Performance Profilers CPU % graphs obtained from the sequential program, and 1, 2, 3 and 12 core run throughs of the program
+respectively.  
+
+![SEQUENTIAL](./README_images/diagseq.JPG)
+![1 CORE](./README_images/diag1.JPG)
+![2 CORE](./README_images/diag2.JPG)
+![3 CORE](./README_images/diag3.JPG)
+![12 CORE](./README_images/diag12.JPG)  
+
+As you can see the sequential graph mostly appears to be a flat line from start to finish which was entirely expected, however as
+the number of cores available increases the program as a whole executes in less time, but more interestingly to major zones appear.  
 
 ---
 ## OUTCOME
@@ -264,7 +268,8 @@ program and the parallel programs would grow exponentially. Furthermore It is my
 ---
 ## APPENDICE
 
-### Init
+### Init  
+
 ```c++
 void Init()
 {
@@ -274,9 +279,12 @@ void Init()
 	M1 = M2 * AA_NUMBER;		// M1 = AA_NUMBER ^ (LEN-1);
 	M  = M1 *AA_NUMBER;			// M  = AA_NUMBER ^ (LEN);
 }
-``` 
-![Init](./README_images/Blank%20diagram.png)
-### ReadInputFile
+```  
+
+![Init](./README_images/Blank%20diagram.png)  
+
+### ReadInputFile  
+
 ```c++
 void ReadInputFile(const char* input_name)
 {
@@ -301,9 +309,12 @@ void ReadInputFile(const char* input_name)
 	}
 	fclose(input_file);
 }
-``` 
-![ReadInputFile](./README_images/2.png)
-### CompareAllBacteria
+```  
+
+![ReadInputFile](./README_images/2.png)  
+
+### CompareAllBacteria  
+
 ```c++
 void CompareAllBacteria()
 {
@@ -322,5 +333,6 @@ void CompareAllBacteria()
 			printf("%.20lf\n", correlation);
 		}
 }
-``` 
+```  
+
 ![CompareAllBacteria](./README_images/3.png)
