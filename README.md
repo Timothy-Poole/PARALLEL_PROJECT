@@ -122,7 +122,7 @@ the number of cores available increases the program as a whole executes in less 
 ---
 ## TOOLS & TECHNIQUES USED  
 
-![RYZEN 5950X](./README_images/)  
+![RYZEN 5950X](./README_images/AMD-Ryzen-5000-Series-Ryzen-9.png)  
 
 This project was run inside of a solution (.sln) inside of Visual Studio. The decision to use Visual Studio was made primarily to 
 make use of Visual Studio's inbuilt Performance Profiler. The Profiler was set to monitor CPU usage, and used to test and benchmark 
