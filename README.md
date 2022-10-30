@@ -3,7 +3,24 @@
 ### By Tim Poole
 ### n10476512
 ### CAB401 
-### Unit Coordinator, Wayne Kelly
+### Unit Coordinator, Wayne Kelly  
+
+---
+## BUILD INSTRUCTIONS  
+
+In order to run and compile this program simply 
+1. open the solution inside of visual studio  
+2. uncomment out the version of the program you wish to run, impoved.cpp for the sequential version and final.cpp for the parallel version  
+3. if running the parallel version then adjust the number of threads the program will use by adjusting the command 
+omp_set_num_threads(x) located in line 287 within the main()  
+4. ensure Visual Studio has open MP enabled, do this by right clicking on the project, then 
+selecting project settings from the drop down menu, clicking on "All Options",
+located within the "C/C++" section, scrolling down to "Open MP Support" and selecting yes 
+from the dropdown  
+5. lastly click on Debug located in the top menu bar, and from the drop down select Performance Profiler  
+6. Tick the "CPU Usage" box and then click start and the program will compile, run, and print the output 
+to the console.  
+
 ---
 ## SEQUENTIAL PROGRAM
 
@@ -230,10 +247,7 @@ surprised by how easy and effective implementing Open MP has been. Furthermore t
 seem far more accesible to programmers with lower levels of competancy and are just easier to access in general, 
 which is not the case with pthreads. The final speedup achieved was approximately a x3 increase. This is a fairly 
 good increase in speedup however I did expect that with more cores the speedup would have continued to increase
-further instead of stabilising after 3 cores. This however probably shows that
-
-2. Your source code (both before and after versions) together with instructions for compiling,
-running, hardware requirements and realistic input data sets.
+further instead of stabilising after 3 cores. This however probably shows that  
 
 ---
 ## APPENDICE
