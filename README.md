@@ -107,7 +107,11 @@ Each of These functions can further be broken down into their respective flow co
 This is a lengthy process and these diagrams consume a large amount of space in the report so that have been included in the appendice at the
 end of the report.  
 
+The Init function adds 9 equal weighted steps to the exectution of the program and while, this section can be easily parallelized
+to create a shortest path of 6, as discussed above in the previous section (Tools and techniques), this is totally unessecary and
+could hurt the overall performance of the program.  
 
+The next function is ReadInputFile.
 
 ---
 ## CHALLENGES  
