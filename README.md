@@ -82,6 +82,7 @@ that are grouped together for analysis. In this case Dr Kelly has used 6-mers to
 
 the original sequential application (sourcecode located in improved.cpp) begins execution within the main function
 (code snippet included below)  
+
 ```c++
 int main(int argc,char * argv[])
 {
@@ -99,7 +100,14 @@ int main(int argc,char * argv[])
 The folowing diagram concisely sums up the key components of the main function and helps to further
 breakdown the program into its 3 major sections, the Init, ReadInputFile and CompareAllBacteria
 Functions.  
+
 ![FLOWCHART](./README_images/FLOW%20CHART.png)  
+
+Each of These functions can further be broken down into their respective flow control diagrams and their individual data dependencies deduced.
+This is a lengthy process and these diagrams consume a large amount of space in the report so that have been included in the appendice at the
+end of the report.  
+
+
 
 ---
 ## CHALLENGES  
