@@ -71,13 +71,13 @@ of setting up the multithreading in the first place, outwaying the benefits of p
 ## SEQUENTIAL PROGRAM  & POTENTIAL PARALLELISM
 
 The cvtree project, originally developed by Dr Wayne Kelly of the Queensland University of Technology,
-is a small sequential application written in C++ that aims to find the similarity between disparite genomes
+is a small sequential application written in C++ that aims to find the similarity between disparate genomes
 using frequency vectors. The code (located in improved.cpp) will first read a basic text file called list.txt
-containing the number of Bacteria and their names and will stores these names so that it can then retrieve the relevant data
-from each bacteria's corresponding fasta file located within the data directory. Each fasta file is an Bacteria and consists of many genes, each gene
+containing the number of bacteria and their names and will stores these names so that they can then be used to retrieve the relevant data
+from each bacteria's corresponding fasta file located within the data directory. Each fasta file is a bacteria and consists of many genes, each gene
 in turn is comprised of many proteins called amino acids. There are 20 commonly occuring amino acids each represented by a letter of 
 the alphabet. Instead of comparing each bacteria's genes, parts of the genomes called K-mers can be used to statistically determine
-'how closely related the bacteria are to one another. a K-mer is a sub-section of a gene and the K represents the number of amino acids
+how closely related the bacteria are to one another. a K-mer is a sub-section of a gene and the K represents the number of amino acids
 that are grouped together for analysis. In this case Dr Kelly has used 6-mers to group together the amino acids and traverse the gene. 
 
 the original sequential application (sourcecode located in improved.cpp) begins execution within the main function
@@ -104,18 +104,19 @@ Functions.
 ![FLOWCHART](./README_images/FLOW%20CHART.png)  
 
 Each of These functions can further be broken down into their respective flow control diagrams and their individual data dependencies deduced.
-This is a lengthy process and these diagrams consume a large amount of space in the report so that have been included in the appendice at the
-end of the report.  
+This is a lengthy process and these diagrams consume a large amount of space in the report so they have been included in the appendice at the
+end of the report next to their corresponding code snippets.
 
-The Init function adds 9 equal weighted steps to the exectution of the program and while, this section can be easily parallelized
+The Init function adds 9 equally weighted steps to the exectution of the program and while this section can be easily parallelized
 to create a shortest path of 4, as discussed above in the previous section (Tools and techniques), this is totally unessecary and
 could hurt the overall performance of the program.  
 
-The next function is ReadInputFile. Sequentially after analysing the data depeendencies this function adds 172 equally weighted steps to the program.
-mostly this is due to a for loop which iterates through "number_bacteria" times, which in this case was 41. Within the for loop was 4 equally weighted steps
+The next function is ReadInputFile. Sequentially, after analysing the data depeendencies, this function adds 172 equally weighted steps to the program.
+Mostly this is due to a for loop which iterates through "number_bacteria" times, which in this case was 41. Within the for loop was 4 equally weighted steps
 so the for loop is responsible for 164 of the previously mentioned 172 steps. Theoretically the shortest path through the function with infinite processors
 is 12 steps. In practise, as my machine only has 32 threads, the for loop would need to be completed in 2 passes assuming ideal conditions where the threads
-all execute at once and then again immediately after. This would result in the shortest path on my machine with 32 threads being 16 steps.  
+all execute at once and then again immediately after. This would result in the shortest path on my machine with 32 threads being 16 steps. However this is
+still negligible compared to the next section.
 
 Lastly and most impactful of all is the CompareAllBacteria function. After an array of pointers to Bacteria is created, there are 2 major flow control areas
 that greatly affect the execution time of the program. The first is a basic for loop that executes "number_bacteria" times, which is 41, and each time most
@@ -125,12 +126,12 @@ such as while and for loops which may account for a large percentage of the prog
 Furthermore, the second major part of the CompareAllBacteria function is the double or nested triangle for loop which executes approximately number_bacteria<sup>2</sup> / 2 times and runs the CompareBacteria function every iteration.   
 
 CompareBacteria itself also contains numerous data dependencies and greatly increase the execution time of the program. Admittedly I struggled to analyse the
-data dependencies beyong the overall view of CompareAllBacteria. In the data dependency diagram for CompareAllBacteria I have generally assigned an equal
+data dependencies beyond the overall view of CompareAllBacteria. In the data dependency diagram for CompareAllBacteria I have generally assigned an equal
 weighting to all operations that take place inside the for loops however realisticaly Declaring a new Bacteria and CompareBacteria should have been weighted
-far more.  
+far more.
 
 Immediately both major parts of CompareAllBacteria stand out as prime candidates for parallelisation, specifically because they contain computantionally intensive
-functions and iterate over them many times.
+functions and iterate over those computationally intensive functions numerous times.
 
 ---
 ## CHALLENGES  
