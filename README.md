@@ -241,30 +241,37 @@ e. How did you test that the parallel version produced the exact same results as
 sequential version?  
 
 ---
-## OUTCOME
+## OUTCOME  
 
-i. Reflect on your outcome – 
-
-What have you learnt? 
-How successful was your attempt? 
-Do
-you think you’ve done as well as is possible? 
-What might you have done differently?
-
-This project has yielded a few major learning outcomes. Firstly, prior to using Open MP I had only used
+This project has yielded a few major learning outcomes for me. Firstly, prior to using Open MP I had only used
 the POSIX thread library (pthreads.h) which is an explicit threading library. Explicit Libraries put more
 of the onus on the programmer to manually configure each thread and the memory associated with them. This
-allows for much more granular control over how the program is threaded, however explicit thread libraries are
+allows for much more granular control over how the program is threaded, however explicit threading libraries are
 far more difficult to implement and debug, consuming far more of the prgrammers time and energy. In comparison I have been pleasantly 
 surprised by how easy and effective implementing Open MP has been. Furthermore the resources online about Open Mp
-seem far more accesible to programmers with lower levels of competancy and are just easier to access in general, 
-which is not the case with pthreads. The final speedup achieved was approximately a x3 increase. This is a fairly 
+seem far more accesible to programmers with lower levels of competancy and are generally easier to access, 
+which is not the case with pthreads.  
+
+Furthermore I have enjoyed learning about how to analyse flow control within a program and follow the data dependencies to
+determine where best to apply parallelism to achieve higher performance. Previously when developing programs I **NEVER** stopped
+to consider that by default most if not all applications are developed sequentially without taking into consideration parallelism 
+and thus many programmers are leaving otherwise fairly achievable performance "on the table".  
+
+The final speedup achieved was approximately a x3 increase. This is a fairly 
 good increase in speedup however I did expect that with more cores the speedup would have continued to increase
-further instead of stabilising after only 3 cores. This however probably highlights that more parallelism could
+further instead of stabilising so quickly after only 3 cores. This however probably highlights that more parallelism could
 have been added to the first half of the problem where the speedup was less impressive. However, this could also 
 be the result of a small data set. The area I identified as most computational intensive received the biggest increase in
-performance. If this test were to be performed on a larger dataset I strongly beleive the difference between the sequential
-program and the parallel programs would grow exponentially. Furthermore It is my hypothesis that more 
+performance. If this test were to be performed on a larger dataset, for example 400 bacteria as opposed to only 41,  I strongly 
+believe the difference between the sequential
+program and the parallel programs would have been far greater. Furthermore I beleive that the difference would hasve grown exponentially. 
+It is my hypothesis that more cores do make a significant difference but in this limited experiment were not fully utilized.  
+
+Beyond trying to further improve the program's performance with parallelism using Open MP, This report could
+be extended in future to compare the speedup achieved by an implicit threading library, like "Open MP", vs an Explicit 
+threading Library such as "Microsoft Windows Native threads". Such a comparison would be really insightful as it could
+help programmers understand the pros and cons of each approach and wether or not investing more time into using explicit
+threading is worth the hassle.
 
 ---
 ## APPENDICE
