@@ -115,7 +115,9 @@ The next function is ReadInputFile. Sequentially after analysing the data depeen
 mostly this is due to a for loop which iterates through "number_bacteria" times, which in this case was 41. Within the for loop was 4 equally weighted steps
 so the for loop is responsible for 164 of the previously mentioned 172 steps. Theoretically the shortest path through the function with infinite processors
 is 12 steps. In practise, as my machine only has 32 threads, the for loop would need to be completed in 2 passes assuming ideal conditions where the threads
-all execute at once and then again immediately after. This would result in the shortest path on my machine with 32 threads being 16 steps.
+all execute at once and then again immediately after. This would result in the shortest path on my machine with 32 threads being 16 steps.  
+
+Lastly and most impactful of all is the CompareAllBacteria function. 
 
 ---
 ## CHALLENGES  
