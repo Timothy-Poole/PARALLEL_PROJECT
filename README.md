@@ -235,19 +235,28 @@ void CompareAllBacteria(double** array)
 ---
 ## OUTCOME
 
-i. Reflect on your outcome – What have you learnt? How successful was your attempt? Do
-you think you’ve done as well as is possible? What might you have done differently?
+i. Reflect on your outcome – 
+
+What have you learnt? 
+How successful was your attempt? 
+Do
+you think you’ve done as well as is possible? 
+What might you have done differently?
 
 This project has yielded a few major learning outcomes. Firstly, prior to using Open MP I had only used
 the POSIX thread library (pthreads.h) which is an explicit threading library. Explicit Libraries put more
-of the ownace on the programmer to manually configure each thread and the memory associated with them. This
+of the onus on the programmer to manually configure each thread and the memory associated with them. This
 allows for much more granular control over how the program is threaded, however explicit thread libraries are
-far more difficult to implement and debug, consuming far more time and energy. In comparison I have been pleasantly 
+far more difficult to implement and debug, consuming far more of the prgrammers time and energy. In comparison I have been pleasantly 
 surprised by how easy and effective implementing Open MP has been. Furthermore the resources online about Open Mp
 seem far more accesible to programmers with lower levels of competancy and are just easier to access in general, 
 which is not the case with pthreads. The final speedup achieved was approximately a x3 increase. This is a fairly 
 good increase in speedup however I did expect that with more cores the speedup would have continued to increase
-further instead of stabilising after 3 cores. This however probably shows that  
+further instead of stabilising after only 3 cores. This however probably highlights that more parallelism could
+have been added to the first half of the problem where the speedup was less impressive. However, this could also 
+be the result of a small data set. The area I identified as most computational intensive received the biggest increase in
+performance. If this test were to be performed on a larger dataset I strongly beleive the difference between the sequential
+program and the parallel programs would grow exponentially. Furthermore It is my hypothesis that more 
 
 ---
 ## APPENDICE
