@@ -68,7 +68,7 @@ negative overall impact on the performance of the program. A negative impact wou
 'or setting up the multithreading in the first place out ways the benefits up on each succesive iteration of the for loop.  
 
 ---
-## SEQUENTIAL PROGRAM  
+## SEQUENTIAL PROGRAM  & POTENTIAL PARALLELISM
 
 The cvtree project, originally developed by Dr Wayne Kelly of the Queensland University of Technology,
 is a small sequential application written in C++ that aims to find the similarity between disparite genomes
@@ -111,7 +111,11 @@ The Init function adds 9 equal weighted steps to the exectution of the program a
 to create a shortest path of 4, as discussed above in the previous section (Tools and techniques), this is totally unessecary and
 could hurt the overall performance of the program.  
 
-The next function is ReadInputFile.
+The next function is ReadInputFile. Sequentially after analysing the data depeendencies this function adds 172 equally weighted steps to the program.
+mostly this is due to a for loop which iterates through "number_bacteria" times, which in this case was 41. Within the for loop was 4 equally weighted steps
+so the for loop is responsible for 164 of the previously mentioned 172 steps. Theoretically the shortest path through the function with infinite processors
+is 12 steps. In practise, as my machine only has 32 threads, the for loop would need to be completed in 2 passes assuming ideal conditions where the threads
+all execute at once and then again immediately after. This would result in the shortest path on my machine with 32 threads being 16 steps.
 
 ---
 ## CHALLENGES  
@@ -122,20 +126,7 @@ throughout the program, detangelingling the web of nested functionality. Further
 understand which parts of the program could even be parallezied succesfully, mostly due to the previously mentioned data dependency problem and wether 
 or not those parallel regions would require synchronisation or could be performed out of order. I solved this problem by using Visual
 Studios debugging capabilities to step through the code so I could follow the main thread as it executed the code and used the Profiler to see where
-the program was spending the most amount of time.
-
----
-## POTENTIAL PARALLELISM
-
-b. Your analysis of potential parallelism within the application. This might include
-identification of existing loops or control flow constructs where parallelism might be
-found. Explanation of the data and control dependences that you analysed to determine
-which sections of code were safe to parallelize. Which of these is likely to be of sufficient
-granularity to be worth exploiting? Is it scalable parallelism? A discussion of changes
-required to expose parallelism, such as replacing algorithms or code restructuring
-transformations.
-
-After anlalysing the codebase I concluded that there were 3 major chnages that could be implemented to improve the performance of the program  
+the program was spending the most amount of time.   
 
 ---
 ## THE SOLUTION
