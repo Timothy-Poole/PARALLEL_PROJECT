@@ -117,7 +117,14 @@ so the for loop is responsible for 164 of the previously mentioned 172 steps. Th
 is 12 steps. In practise, as my machine only has 32 threads, the for loop would need to be completed in 2 passes assuming ideal conditions where the threads
 all execute at once and then again immediately after. This would result in the shortest path on my machine with 32 threads being 16 steps.  
 
-Lastly and most impactful of all is the CompareAllBacteria function. 
+Lastly and most impactful of all is the CompareAllBacteria function. After an array of pointers to Bacteria is created, there are 2 major flow control areas
+that greatly affect the execution time of the program. The first is a basic for loop that executes "number_bacteria" times, which is 41, and each time most
+noticeably declares a new Bacteria each time. This is significant as the bacteria class contains many data dependencies and numerous flow control statements
+such as while loops and for loops which may account for a large percentage of the programs execution time.  
+
+Furthermore, the second major part of the CompareAllBacteria function is the double or nested triangle for loop which executes approximately number_bacteria<sup>2</sup> / 2 times and runs the CompareBacteria function every iteration.   
+
+CompareBacteria itself also contains numerous data dependencies and greatly increase the execution time of the program. 
 
 ---
 ## CHALLENGES  
